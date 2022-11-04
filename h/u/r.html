@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+
+            
+    <head>
+
+        <meta charset="utf-8"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <title>
+            
+            Бесплатный, но стильный онлайн блокнот для записи заметок
+
+        </title>
+
+        <meta name="description" content="Блокнотик - это современный, бесплатный онлайн блокнот, который автоматически сохраняет ваши текстовые заметки. Ваши заметки всегда доступны в вашем аккуаунте. Пишите на здоровье!."/>
+
+        <meta name="keywords" content="онлайн блокнот, online блокнот, текстовый блокнот, бесплатный блокнот, блокнот для заметок, блокнот для текста, скачать блокнот, блокнот для компьютера, программа блокнот"/>
+
+        <link href="{% static 'i/l.png' %}" rel="shortcut icon" />
+
+        
+
+    </head>
+
+    <body>
+        
+        <div class="n">
+
+            <div class="l">
+
+                <!-- SVG -->
+
+                <h1>Блокнотик</h1>
+
+            </div>
+
+        </div>
+
+        <div class="m">
+
+            <h1>
+
+                Войти в мой блокнотик
+
+            </h1>
+            
+
+            {% if e %}
+
+                <p>
+
+                    Неверная электронная почта или пароль
+
+                </p>
+
+            {% endif %}
+            
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- SVG -->
+                <input name = "username" placeholder = "Электронная почта" autocomplete="off">
+
+                <p>
+
+
+
+                </p>
+
+                <!-- SVG -->
+                <input name = "n" placeholder = "Имя" autocomplete="off">
+
+                <p>
+
+
+
+                </p>
+
+                <!-- SVG -->
+                <input name = "password1" placeholder = "Пароль" autocomplete="off">
+
+                <p>
+
+
+
+                </p>                
+
+                <h4>
+
+
+
+                </h4>
+
+                <button type="submit">
+
+                    Зарегистрироваться
+
+                </button>
+                
+            </form>
+
+        </div>
+
+
+    </body>
+
+
+</html>

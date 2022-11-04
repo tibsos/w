@@ -1,0 +1,147 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+
+    <head>
+
+        <meta charset="utf-8"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <title>
+            
+            Бесплатный, но стильный онлайн блокнот для записи заметок
+
+        </title>
+
+	    <meta name="description" content="Блокнотик - это современный, бесплатный онлайн блокнот, который автоматически сохраняет ваши текстовые заметки. Ваши заметки всегда доступны в вашем аккуаунте. Пишите на здоровье!."/>
+
+        <meta name="keywords" content="онлайн блокнот, online блокнот, текстовый блокнот, бесплатный блокнот, блокнот для заметок, блокнот для текста, скачать блокнот, блокнот для компьютера, программа блокнот"/>
+
+        <link href="{% static 'i/l.png' %}" rel="shortcut icon" />
+
+        
+
+    </head>
+
+    <body>
+        
+        <div class="n">
+
+            <div class="l">
+
+                <!-- SVG -->
+
+                <h1>Блокнотик</h1>
+
+            </div>
+
+            <div class="r">
+
+                {% if u %}
+
+                    <a href="{% url 'a:h' %}">
+
+                        <div>
+
+                            <!-- SVG -->
+
+                            Home
+
+                        </div>
+
+                    </a>
+
+                    <a href="{% url 'u:lo' %}">
+
+                        <div>
+
+                            <!-- SVG -->
+
+                            Log out
+
+                        </div>
+
+                    </a>
+                
+                {% else %}
+
+                    <a href="{% url 'u:li' %}">
+
+                        <button class="li">
+
+                            Войти
+
+                        </button>
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div class="m">
+
+            <div class="c">
+
+                <h1>
+
+
+                </h1>
+
+                <h2>
+
+
+
+                </h2>
+
+
+                <a href="{% url 'u:r' %}">
+
+                    <button>
+
+                        Создать блокнот
+
+                    </button>
+
+                </a>
+                
+
+            </div>
+
+            <div class="i">
+
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="f">
+
+            <ul>
+
+                <a href="">
+
+                    <li>
+
+
+
+                    </li>
+
+                </a>
+
+            </ul>
+
+        </div>
+
+    </body>
+
+
+</html>

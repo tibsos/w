@@ -1,0 +1,269 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+
+    <head>
+
+        <meta charset="utf-8"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <title>
+            
+            Бесплатный, но стильный онлайн блокнот для записи заметок
+
+        </title>
+
+	    <meta name="description" content="Блокнотик - это современный, бесплатный онлайн блокнот, который автоматически сохраняет ваши текстовые заметки. Ваши заметки всегда доступны в вашем аккуаунте. Пишите на здоровье!."/>
+
+        <meta name="keywords" content="онлайн блокнот, online блокнот, текстовый блокнот, бесплатный блокнот, блокнот для заметок, блокнот для текста, скачать блокнот, блокнот для компьютера, программа блокнот"/>
+
+        <link href="{% static 'i/l.png' %}" rel="shortcut icon" />
+
+        <link rel="stylesheet" href="{% static 'c/a/h.css' %}">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script src="https://unpkg.com/htmx.org@1.8.2"></script>
+        
+
+    </head>
+
+    <body>
+        
+        <div class="n">
+
+            <div class="l">
+
+                <!-- SVG -->
+
+                <h1>Блокнотик</h1>
+
+            </div>
+
+            <div class="m">
+
+                <input id='th' type="checkbox">
+
+            </div>
+
+            <div class="r">
+
+                <div>
+
+                    {{ pi }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="n">
+
+            <div class="nlw">
+
+                <form>
+
+                    {% csrf_token %}
+
+                    <button hx-post="{% url 'a:cn' %}" hx-target="#nl">
+
+                        +    Новая заметка
+                
+                    </button>
+
+                </form>
+                    
+
+                <div id="nl">
+
+                    {% include 'a/nl.html' %}
+    
+                </div>
+
+            </div>
+
+            
+<div class="an" id="{{ an.uid }}">
+
+    
+
+    <div>
+
+            <ul class="r">
+
+                <li id="b">
+
+                    <button>
+
+                        <p>
+
+                            <b>Ж</b>
+
+                        </p>
+                        
+                    </button>
+
+                </li>
+
+                <li id="i">
+
+                    <button>
+
+                        <p>
+
+                            <i>К</i>
+
+                        </p>
+                        
+                    </button>
+
+                </li>
+
+                <li id="u">
+
+                    <button>
+
+                        <p>
+
+                            <u>C</u>
+
+                        </p>
+                        
+                    </button>
+
+                </li>
+
+                <li id="c">
+
+                    <button>
+
+                        <p>
+
+                            <s>П</s>
+
+                        </p>
+                        
+                    </button>
+
+                </li>
+
+            </ul>
+
+            <ul>
+
+                
+
+                    <form>
+
+                        {% csrf_token %}
+
+                        <li id="p">
+                            
+                            <button hx-post="{% url 'a:p' %}" hx-target="#nl">
+
+                                p
+
+                            </button>
+
+                        </li>
+
+                        <li id="d">
+
+                            <button hx-post="{% url 'a:d' uid %}" hx-target="#nl">
+
+                                d
+
+                            </button>
+
+                        </li>
+
+                    </form>
+
+
+                
+
+            </ul>
+
+        </div>
+
+        <div>
+
+            <input name="nt" type="text" value="{{ na.t }}" placeholder="Заголовок">
+            <div contenteditable class="nc" data-ph="Я">{{ an.c | safe }}</div>
+
+        </div>
+        
+
+    </div>
+
+
+        </div>
+
+
+    </body>
+
+    <style>
+
+        @font-face {
+            font-family: 'c';
+            src: url("{% static 'f/c.ttf' %}");
+        }
+
+    </style>
+
+
+<script>
+
+    
+
+
+    $('#b').click(function(){
+
+        document.execCommand('bold');
+        $('.nc').focus();
+
+    });
+
+    $('#i').click(function(){
+
+        document.execCommand('italic');
+        $('.nc').focus();
+
+    });
+    
+    $('#u').click(function(){
+
+        document.execCommand('underline');
+        $('.nc').focus();
+
+    });
+
+    $('#c').click(function(){
+
+        document.execCommand('strikeThrough');
+        $('.nc').focus();
+
+    });
+
+    $('#ul').click(function(){
+
+        document.execCommand('bold');
+        $('.nc').focus();
+
+    });
+
+    $('#ol').click(function(){
+
+        document.execCommand('bold');
+        $('.nc').focus();
+
+    });
+
+</script>
+
+
+</html>
