@@ -1,38 +1,30 @@
-<ul>
+{% for n in n %}
 
-    {% for n in n %}
+<button class="n a" id="{{ n.uid }}">
 
-        {% if n.p %}
+    <input value="{{ n.c }}" hidden>
 
-        <p>
+    {% if n.p %}
 
-            p
-            
-        </p>
-        
-        
-        {% endif %}
+            <p>
+
+                p
+                
+            </p>
+    
+    
+    {% endif %}
 
         {% if n.t %}
 
-            <h4>
-                
-                
-                
-                {{ n.t }}
-
-            </h4>    
+            <h4>{{ n.t }}</h4>    
 
         {% else %}
 
-            <h4>
-
-                Без названия
-
-            </h4>
+            <h4>Без названия</h4>
 
         {% endif %}
 
-    {% endfor%}
+    </button>        
 
-</ul>
+{% endfor%}

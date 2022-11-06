@@ -25,6 +25,13 @@ def h(r):
 
 # htmx
 
+def a(r):
+
+    r.user.p.an = N.objects.get(uid = r.POST.get('u'))
+    r.user.p.save()
+
+    return HttpResponse('K')
+
 def cn(r):
 
     u = r.user
@@ -55,14 +62,16 @@ def p(r):
 
     return render(r, 'a/nl.html', c)
 
-def d(r, uid):
+def d(r):
 
     u = r.user
 
-    n = get_object_or_404(N, uid = uid)
+    n = u.p.an
+
+    u.p.an = None
+    u.p.save()
 
     n.delete()
-
 
     n = N.objects.filter(u = u)
 
@@ -70,7 +79,7 @@ def d(r, uid):
     u.p.save()
     an = u.p.an
 
-    return render(r, 'a/n.html', {'n': n, 'an': an})
+    return render(r, 'a/nl.html', {'n': n, 'an': an})
 
 
 # ajax

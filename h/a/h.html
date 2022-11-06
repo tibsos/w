@@ -33,7 +33,7 @@
 
     <body>
         
-        <div class="n">
+        <div class="nav">
 
             <div class="l">
 
@@ -69,9 +69,10 @@
 
                     {% csrf_token %}
 
-                    <button hx-post="{% url 'a:cn' %}" hx-target="#nl">
+                    <!-- Max notes while !premium condition -->
+                    <button hx-post="{% url 'a:cn' %}" hx-target="#nl" class="anb">
 
-                        +    Новая заметка
+                        +
                 
                     </button>
 
@@ -85,120 +86,112 @@
                 </div>
 
             </div>
-
             
-<div class="an" id="{{ an.uid }}">
+        <div class="an" id="{{ an.uid }}">
 
-    
+            <div>
 
-    <div>
+                    <ul class="l">
 
-            <ul class="r">
+                        <li id="b">
 
-                <li id="b">
+                            <button>
 
-                    <button>
+                                <p>
 
-                        <p>
+                                    <b>Ж</b>
 
-                            <b>Ж</b>
-
-                        </p>
-                        
-                    </button>
-
-                </li>
-
-                <li id="i">
-
-                    <button>
-
-                        <p>
-
-                            <i>К</i>
-
-                        </p>
-                        
-                    </button>
-
-                </li>
-
-                <li id="u">
-
-                    <button>
-
-                        <p>
-
-                            <u>C</u>
-
-                        </p>
-                        
-                    </button>
-
-                </li>
-
-                <li id="c">
-
-                    <button>
-
-                        <p>
-
-                            <s>П</s>
-
-                        </p>
-                        
-                    </button>
-
-                </li>
-
-            </ul>
-
-            <ul>
-
-                
-
-                    <form>
-
-                        {% csrf_token %}
-
-                        <li id="p">
-                            
-                            <button hx-post="{% url 'a:p' %}" hx-target="#nl">
-
-                                p
-
+                                </p>
+                                
                             </button>
 
                         </li>
 
-                        <li id="d">
+                        <li id="i">
 
-                            <button hx-post="{% url 'a:d' uid %}" hx-target="#nl">
+                            <button>
 
-                                d
+                                <p>
 
+                                    <i>К</i>
+
+                                </p>
+                                
                             </button>
 
                         </li>
 
-                    </form>
+                        <li id="u">
 
+                            <button>
 
+                                <p>
+
+                                    <u>C</u>
+
+                                </p>
+                                
+                            </button>
+
+                        </li>
+
+                        <li id="c">
+
+                            <button>
+
+                                <p>
+
+                                    <s>П</s>
+
+                                </p>
+                                
+                            </button>
+
+                        </li>
+
+                    </ul>
+
+                    <ul class="r">
+
+                            <form>
+
+                                {% csrf_token %}
+
+                                <li id="p">
+                                    
+                                    <button hx-post="{% url 'a:p' %}" hx-target="#nl">
+
+                                        p
+
+                                    </button>
+
+                                </li>
+
+                                <li id="d">
+
+                                    <button hx-post="{% url 'a:d' %}" hx-target="#nl">
+
+                                        d
+
+                                    </button>
+
+                                </li>
+
+                            </form>
+
+                    </ul>
+
+                </div>
+
+                <div class="ntc">
+
+                    <input class="nt" name="nt" type="text" value="{{ an.t }}" placeholder="Заголовок">
+                    <div contenteditable class="nc" data-ph="Я помню чудное мгновение...\\">{{ an.c | safe }}</div>
+
+                </div>
                 
 
-            </ul>
-
         </div>
-
-        <div>
-
-            <input name="nt" type="text" value="{{ na.t }}" placeholder="Заголовок">
-            <div contenteditable class="nc" data-ph="Я">{{ an.c | safe }}</div>
-
-        </div>
-        
-
-    </div>
 
 
         </div>
@@ -218,7 +211,143 @@
 
 <script>
 
-    
+    $('.nt').on('keyup',function(){
+
+        t = $('.nt').val()
+        
+
+        if (t===''){
+
+            $('.a').children('h4').html('Без названия');
+
+        } else {
+
+            $('.a').children('h4').html(t);
+
+        }
+
+    })
+
+    $('.n').click(function(){
+        
+        uid = $('.an').attr('id');
+        t = $('.nt').val()
+        c = $('.nc').html();
+
+        ut();
+        uc();
+
+        $('#'+uid).children('input').val(c);
+
+        if (t===''){
+
+            $('#'+uid).children('h4').html("Без названия");
+
+        } else {
+
+            $('#'+uid).children('h4').html(t);
+
+        }
+        
+
+        uid = $(this).attr('id');
+        t = $(this).children('h4').html();
+        c = $(this).children('input').val();
+        
+        $('.an').attr('id', uid);
+        $('.nc').html(c);
+
+        if (t===''){
+
+        $('.nt').val('');
+
+        } else {
+
+        $('#'+uid).children('h4').html(t);
+
+        }
+        
+        
+        
+        
+    });
+        
+
+    $(window).on("beforeunload", function() { 
+
+        ut();
+        uc();
+        an();
+
+    });
+
+    function an(){
+
+        $.ajax({
+
+            type: "POST",
+            url: "{% url 'a:a' %}",
+            data: {
+
+                'csrfmiddlewaretoken': "{{ csrf_token }}",
+                
+                u: $(".an").attr('id'),
+
+            }
+
+        });
+
+    }
+
+    function ut(){
+
+        $.ajax({
+
+            type: "POST",
+            url: "{% url 'a:t' %}",
+            data: {
+
+                'csrfmiddlewaretoken': "{{ csrf_token }}",
+                
+                u: $(".an").attr('id'),
+                t: $(".nt").val(),
+
+            }
+
+        });
+
+    };
+
+    function uc(){
+
+        $.ajax({
+
+            type: "POST",
+            url: "{% url 'a:c' %}",
+            data: {
+
+                'csrfmiddlewaretoken': "{{ csrf_token }}",
+                
+                u: $(".an").attr('id'),
+                c: $(".nc").html(),
+
+            }
+
+        });
+
+    } 
+
+    $('.nt').on('focusout',function(){
+
+        ut();
+
+    });
+
+    $('.nc').on('focusout',function(){
+
+        uc();
+
+    });
 
 
     $('#b').click(function(){

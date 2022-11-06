@@ -12,18 +12,17 @@ urlpatterns = [
 
 htmx_urlpatterns = [
 
-    path('cn', cn, name='cn'), # create note
-
-    path('p', p, name='p'), # pin note
-
-    path('d/<uuid:uid>/', d, name='d'), # delete note
+    path('cn', cn, name='cn'),
+    path('p', p, name='p'),
+    path('d', d, name='d'),
 
 ]
 
 ajax_urlpatterns = [
 
-    path('t', t, name='t'), # update title
-    path('c', c, name='c'), # update content
+    path('t', t, name='t'),
+    path('c', c, name='c'),
+    path('a', a, name='a'),
 
 ]
 
